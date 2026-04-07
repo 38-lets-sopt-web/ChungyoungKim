@@ -1,0 +1,14 @@
+:root {
+  --header-height: 5.5rem;
+  --content-width: 72rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --radius-full: 999px;
+  --color-background: #f7f5f2;
+  --color-surface: #ffffff;
+  --color-border: #ddd7d0;
+  --color-text: #2e2a27;
+  --color-text-muted: #6f6861;
+  --color-accent: #4a73ff;
+}
