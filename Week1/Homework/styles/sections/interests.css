@@ -1,0 +1,124 @@
+.interests {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  align-content: start;
+}
+
+.interests.content-section {
+  min-height: auto;
+}
+
+.interest-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.interest-card {
+  height: 100%;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: #ffffff;
+  box-shadow: 0 8px 20px rgba(46, 42, 39, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.interest-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 28px rgba(46, 42, 39, 0.14);
+}
+
+.interest-card figure {
+  margin: 0;
+  overflow: hidden;
+}
+
+.interest-card img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  display: block;
+  object-fit: cover;
+}
+
+.interest-card__body {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.interest-card h3 {
+  font-size: clamp(1rem, 1.2vw, 1.25rem);
+  line-height: 1.3;
+  word-break: keep-all;
+}
+
+.interest-card__buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.interest-card button {
+  min-width: 0;
+  padding: 0.75rem 0.6rem;
+  border: none;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.interest-card__buttons button:first-child {
+  background-color: #bfe0ff;
+  color: #ffffff;
+}
+
+.interest-card__buttons button:last-child {
+  background-color: #ffb8bd;
+  color: #ffffff;
+}
+
+.interest-card__buttons button:first-child:hover {
+  background-color: #8fc6ff;
+  transform: translateY(-2px);
+}
+
+.interest-card__buttons button:last-child:hover {
+  background-color: #ff8f99;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1400px) {
+  .interest-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1100px) {
+  .interest-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .interest-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .interest-card__body {
+    gap: 0.75rem;
+    padding: 0.875rem;
+  }
+
+  .interest-card button {
+    font-size: 0.875rem;
+  }
+}
