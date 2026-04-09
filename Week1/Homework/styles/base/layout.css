@@ -4,6 +4,7 @@ html {
 }
 
 .page-main {
+  flex: 1;
   padding-top: calc(var(--header-height) + 2rem);
 }
 
@@ -25,6 +26,5 @@ html {
 }
 
 .content-section {
-  min-height: 100vh;
   scroll-margin-top: calc(var(--header-height) + 1.5rem);
 }
