@@ -1,57 +1,57 @@
 .photo-dump {
-    display: grid;
-    gap: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
 }
 
 .photo-dump__grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-template-rows: 16rem 15rem 15rem;
-    grid-template-areas:
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: 16rem 15rem 15rem;
+  grid-template-areas:
     "top-left top-middle top-wide top-wide"
     "feature feature feature side-top"
     "feature feature feature side-bottom";
-    gap: 1.25rem;
+  gap: 1.25rem;
 }
 
 .photo-dump__item {
-    margin: 0;
-    overflow: hidden;
-    border-radius: 1rem;
-    background-color: #ffffff;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: #ffffff;
 }
 
 .photo-dump__item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
 .photo-dump__item:hover img {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .photo-dump__item--top-left {
-    grid-area: top-left;
+  grid-area: top-left;
 }
 
 .photo-dump__item--top-middle {
-    grid-area: top-middle;
+  grid-area: top-middle;
 }
 
 .photo-dump__item--top-wide {
-    grid-area: top-wide;
+  grid-area: top-wide;
 }
 
 .photo-dump__item--feature {
-    grid-area: feature;
+  grid-area: feature;
 }
 
 .photo-dump__item--side-top {
-    grid-area: side-top;
+  grid-area: side-top;
 }
 
 .photo-dump__item--side-bottom {
-    grid-area: side-bottom;
+  grid-area: side-bottom;
 }
