@@ -1,13 +1,9 @@
 .interests {
   display: grid;
+  padding-top: 5rem;
   gap: 1.5rem;
-  padding: 1.5rem;
   border-radius: 1rem;
   align-content: start;
-}
-
-.interests.content-section {
-  min-height: auto;
 }
 
 .interest-grid {
@@ -60,7 +56,7 @@
   gap: 0.75rem;
 }
 
-.interest-card button {
+.interest-card__button {
   min-width: 0;
   padding: 0.75rem 0.6rem;
   border: none;
@@ -76,22 +72,22 @@
     transform 0.2s ease;
 }
 
-.interest-card__buttons button:first-child {
+.interest-card__button--like {
   background-color: #bfe0ff;
   color: #ffffff;
 }
 
-.interest-card__buttons button:last-child {
+.interest-card__button--hate {
   background-color: #ffb8bd;
   color: #ffffff;
 }
 
-.interest-card__buttons button:first-child:hover {
+.interest-card__button--like:hover {
   background-color: #8fc6ff;
   transform: translateY(-2px);
 }
 
-.interest-card__buttons button:last-child:hover {
+.interest-card__button--hate:hover {
   background-color: #ff8f99;
   transform: translateY(-2px);
 }
@@ -118,7 +114,7 @@
     padding: 0.875rem;
   }
 
-  .interest-card button {
+  .interest-card__button {
     font-size: 0.875rem;
   }
 }
