@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>충영이의 가계부</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/features/header.css" />
+    <link rel="stylesheet" href="css/features/search-filter.css" />
+    <link rel="stylesheet" href="css/features/expense-table.css" />
+    <link rel="stylesheet" href="css/features/expense-form-modal.css" />
+    <link rel="stylesheet" href="css/features/expense-detail-modal.css" />
+  </head>
+  <body>
+    <header class="account-book-header">
+      <div class="account-book-header__inner">
+        <div class="account-book-header__slot account-book-header__slot--left">
+          <button
+            type="button"
+            class="account-book-header__icon-button"
+            data-action="reload-page"
+            aria-label="페이지 새로고침"
+          >
+            <span class="account-book-header__icon" aria-hidden="true">💸</span>
+          </button>
+        </div>
+        <h1 class="account-book-header__title">충영이의 가계부</h1>
+        <p class="account-book-header__slot account-book-header__slot--right">
+          SOPT 38th WEB
+        </p>
+      </div>
+    </header>
+
+    <main id="app" class="page-shell"></main>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

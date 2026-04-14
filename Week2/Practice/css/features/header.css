@@ -1,0 +1,81 @@
+.account-book-header {
+  width: 100%;
+  background: var(--color-header-background);
+  border-bottom: 1px solid var(--color-header-border);
+}
+
+.account-book-header__inner {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  width: min(1400px, calc(100% - var(--space-80)));
+  min-height: var(--space-100);
+  margin: 0 auto;
+  gap: var(--space-20);
+}
+
+.account-book-header__slot,
+.account-book-header__title,
+.account-book-header__inner {
+  min-width: 0;
+}
+
+.account-book-header__slot--left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.account-book-header__icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--space-50);
+  min-height: var(--space-50);
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.account-book-header__icon-button:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.account-book-header__slot--right {
+  color: var(--color-header-text-muted);
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: right;
+}
+
+.account-book-header__icon {
+  color: var(--color-header-accent);
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.account-book-header__title {
+  color: var(--color-header-text);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.75rem, 2vw, 2.2rem);
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: -0.03em;
+}
+
+@media (max-width: 768px) {
+  .account-book-header__inner {
+    width: calc(100% - var(--space-40));
+    min-height: var(--space-80);
+  }
+
+  .account-book-header__title {
+    font-size: 1.2rem;
+  }
+
+  .account-book-header__slot--right {
+    font-size: 0.8rem;
+  }
+}
