@@ -1,0 +1,5 @@
+.page-shell {
+  width: min(1200px, calc(100% - var(--space-60)));
+  margin: 0 auto;
+  padding: var(--space-40) 0 var(--space-50);
+}
