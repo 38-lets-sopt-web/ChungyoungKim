@@ -1,0 +1,9 @@
+import { expenses } from "../data/expenses.js";
+
+const STORAGE_KEY = "expenseData";
+
+export function ensureExpenseStorage() {
+  if (!localStorage.getItem(STORAGE_KEY)) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(expenses));
+  }
+}
