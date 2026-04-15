@@ -21,7 +21,7 @@
           <button
             type="button"
             class="account-book-header__icon-button"
-            data-action="reload-page"
+            data-action="페이지-새로고침"
             aria-label="페이지 새로고침"
           >
             <span class="account-book-header__icon" aria-hidden="true">💸</span>
@@ -34,7 +34,67 @@
       </div>
     </header>
 
-    <main id="app" class="page-shell"></main>
+    <main id="app" class="page-shell">
+      <section class="search-filter" aria-labelledby="search-filter-title">
+        <h2 id="search-filter-title" class="search-filter__title">검색 필터</h2>
+
+        <form class="search-filter__form" novalidate>
+          <div class="search-filter__grid">
+            <div class="search-filter__field search-filter__field--full">
+              <label class="search-filter__label" for="filter-keyword">검색어</label>
+              <input
+                id="filter-keyword"
+                name="keyword"
+                type="text"
+                class="search-filter__control"
+                placeholder="제목, 날짜, 금액 등을 입력하세요"
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="search-filter__field">
+              <label class="search-filter__label" for="filter-type">유형</label>
+              <select id="filter-type" name="type" class="search-filter__control">
+                <option value="">전체</option>
+                <option value="수입">수입</option>
+                <option value="지출">지출</option>
+              </select>
+            </div>
+
+            <div class="search-filter__field">
+              <label class="search-filter__label" for="filter-category">카테고리</label>
+              <select id="filter-category" name="category" class="search-filter__control">
+                <option value="">전체</option>
+                <option value="식비">식비</option>
+                <option value="월급">월급</option>
+                <option value="문화">문화</option>
+                <option value="교통">교통</option>
+                <option value="기타">기타</option>
+                <option value="생활">생활</option>
+              </select>
+            </div>
+
+            <div class="search-filter__field">
+              <label class="search-filter__label" for="filter-payment">결제수단</label>
+              <select id="filter-payment" name="payment" class="search-filter__control">
+                <option value="">전체</option>
+                <option value="신용카드">신용카드</option>
+                <option value="체크카드">체크카드</option>
+              </select>
+            </div>
+
+            <button type="submit" class="search-filter__button">적용</button>
+            <button
+              type="button"
+              class="search-filter__button search-filter__button--secondary"
+              data-action="필터-초기화"
+            >
+              초기화
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
     <script type="module" src="js/app.js"></script>
   </body>
 </html>
