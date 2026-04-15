@@ -94,6 +94,79 @@
           </div>
         </form>
       </section>
+
+      <section class="expense-table" aria-labelledby="expense-table-title">
+        <div class="expense-table__toolbar">
+          <div class="expense-table__sort-group">
+            <label class="expense-table__sort-label" for="expense-sort">
+              정렬
+            </label>
+            <select id="expense-sort" class="expense-table__sort-select" name="sort">
+              <option value="latest">날짜 최신순</option>
+              <option value="oldest">날짜 오래된순</option>
+            </select>
+          </div>
+
+          <div class="expense-table__actions">
+            <button
+              type="button"
+              class="expense-table__action-button expense-table__action-button--secondary"
+              data-action="선택-삭제"
+              disabled
+            >
+              선택 삭제
+            </button>
+            <button
+              type="button"
+              class="expense-table__action-button"
+              data-action="항목-추가"
+            >
+              추가
+            </button>
+          </div>
+        </div>
+
+        <div class="expense-table__card">
+          <div class="expense-table__card-header">
+            <div>
+              <h2 id="expense-table-title" class="expense-table__title">내역 테이블</h2>
+              <p class="expense-table__description">
+                검색 조건에 맞는 가계부 내역을 확인하세요.
+              </p>
+            </div>
+          </div>
+
+          <div class="expense-table__table-wrap">
+            <table class="expense-table__table">
+              <caption class="sr-only">가계부 내역 목록</caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="expense-table__checkbox-cell">
+                    <input
+                      id="expense-select-all"
+                      type="checkbox"
+                      class="expense-table__checkbox"
+                      aria-label="전체 선택"
+                    />
+                  </th>
+                  <th scope="col">제목</th>
+                  <th scope="col">날짜</th>
+                  <th scope="col">카테고리</th>
+                  <th scope="col">결제수단</th>
+                  <th scope="col" class="expense-table__amount-heading">금액</th>
+                </tr>
+              </thead>
+              <tbody class="expense-table__body"></tbody>
+              <tfoot>
+                <tr class="expense-table__total-row">
+                  <th scope="row" colspan="5">Total</th>
+                  <td class="expense-table__total-value">0</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </section>
     </main>
     <script type="module" src="js/app.js"></script>
   </body>

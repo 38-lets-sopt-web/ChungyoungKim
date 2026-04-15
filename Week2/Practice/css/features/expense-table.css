@@ -1,0 +1,164 @@
+.expense-table {
+  display: grid;
+  gap: var(--space-20);
+}
+
+.expense-table__toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-20);
+}
+
+.expense-table__sort-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-20);
+}
+
+.expense-table__sort-label {
+  color: var(--color-text-strong);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.expense-table__sort-select {
+  min-width: 180px;
+  height: var(--space-50);
+  padding: 0 var(--space-20);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text-default);
+  font-size: 1rem;
+}
+
+.expense-table__sort-select:focus-visible,
+.expense-table__action-button:focus-visible,
+.expense-table__title-button:focus-visible,
+.expense-table__checkbox:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.expense-table__actions {
+  display: flex;
+  gap: var(--space-10);
+}
+
+.expense-table__action-button {
+  min-width: 120px;
+  min-height: var(--space-50);
+  padding: 0 var(--space-20);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: var(--color-accent-contrast);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.expense-table__action-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.expense-table__action-button--secondary {
+  background: var(--color-header-background);
+}
+
+.expense-table__card {
+  padding: var(--space-30);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-strong);
+}
+
+.expense-table__card-header {
+  margin-bottom: var(--space-20);
+}
+
+.expense-table__title {
+  margin-bottom: var(--space-10);
+  color: var(--color-text-default);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.expense-table__description {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+.expense-table__table-wrap {
+  overflow-x: auto;
+}
+
+.expense-table__table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.expense-table__table th,
+.expense-table__table td {
+  padding: var(--space-20);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-default);
+  font-size: 0.95rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.expense-table__table thead th {
+  border-top: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.expense-table__checkbox-cell {
+  width: 70px;
+}
+
+.expense-table__checkbox {
+  width: var(--space-20);
+  height: var(--space-20);
+  accent-color: var(--color-primary);
+}
+
+.expense-table__title-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-strong);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.expense-table__amount-heading,
+.expense-table__amount,
+.expense-table__total-value {
+  text-align: right;
+}
+
+.expense-table__amount--positive {
+  color: var(--color-positive);
+  font-weight: 700;
+}
+
+.expense-table__amount--negative {
+  color: var(--color-negative);
+  font-weight: 700;
+}
+
+.expense-table__empty {
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.expense-table__total-row th,
+.expense-table__total-row td {
+  font-weight: 700;
+}
