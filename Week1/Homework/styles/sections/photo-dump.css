@@ -17,7 +17,7 @@
 .photo-dump__item {
   margin: 0;
   overflow: hidden;
-  border-radius: 1rem;
+  border-radius: 16px;
   background-color: #ffffff;
 }
 
