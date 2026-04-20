@@ -128,18 +128,13 @@
 
         <div class="expense-table__card">
           <div class="expense-table__card-header">
-            <div>
-              <h2 id="expense-table-title" class="expense-table__title">내역 테이블</h2>
-              <p class="expense-table__description">
-                검색 조건에 맞는 가계부 내역을 확인하세요.
-              </p>
-            </div>
+            <h2 id="expense-table-title" class="expense-table__title">4월 소비 내역</h2>
           </div>
 
           <div class="expense-table__table-wrap">
             <table class="expense-table__table">
               <caption class="sr-only">가계부 내역 목록</caption>
-              <thead>
+              <thead class="expense-table__table__header">
                 <tr>
                   <th scope="col" class="expense-table__checkbox-cell">
                     <input
@@ -159,7 +154,7 @@
               <tbody class="expense-table__body"></tbody>
               <tfoot>
                 <tr class="expense-table__total-row">
-                  <th scope="row" colspan="5">Total</th>
+                  <th scope="row" colspan="5">합계</th>
                   <td class="expense-table__total-value">0</td>
                 </tr>
               </tfoot>
@@ -168,6 +163,163 @@
         </div>
       </section>
     </main>
+
+    <div class="expense-form-modal" data-modal="내역-추가" hidden>
+      <div class="expense-form-modal__backdrop" data-action="모달-닫기"></div>
+      <section
+        class="expense-form-modal__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="expense-form-title"
+      >
+        <div class="expense-form-modal__header">
+          <h2 id="expense-form-title" class="expense-form-modal__title">내역 추가</h2>
+          <button
+            type="button"
+            class="expense-form-modal__close-button"
+            data-action="모달-닫기"
+            aria-label="모달 닫기"
+          >
+            닫기
+          </button>
+        </div>
+
+        <form class="expense-form-modal__form" novalidate>
+          <div class="expense-form-modal__fields">
+            <div class="expense-form-modal__field expense-form-modal__field--full">
+              <label class="expense-form-modal__label" for="expense-title">제목</label>
+              <input
+                id="expense-title"
+                name="title"
+                type="text"
+                class="expense-form-modal__control"
+                placeholder="제목을 입력하세요"
+              />
+            </div>
+
+            <div class="expense-form-modal__field">
+              <label class="expense-form-modal__label" for="expense-type">유형</label>
+              <select
+                id="expense-type"
+                name="type"
+                class="expense-form-modal__control"
+              >
+                <option value="">선택</option>
+                <option value="지출">지출 (-)</option>
+                <option value="수입">수입 (+)</option>
+              </select>
+            </div>
+
+            <div class="expense-form-modal__field">
+              <label class="expense-form-modal__label" for="expense-amount">
+                금액 (숫자만)
+              </label>
+              <input
+                id="expense-amount"
+                name="amount"
+                type="number"
+                min="0"
+                class="expense-form-modal__control"
+                placeholder="금액을 입력하세요"
+              />
+            </div>
+
+            <div class="expense-form-modal__field expense-form-modal__field--full">
+              <label class="expense-form-modal__label" for="expense-date">날짜</label>
+              <input
+                id="expense-date"
+                name="date"
+                type="date"
+                class="expense-form-modal__control"
+              />
+            </div>
+
+            <div class="expense-form-modal__field">
+              <label class="expense-form-modal__label" for="expense-category">카테고리</label>
+              <select
+                id="expense-category"
+                name="category"
+                class="expense-form-modal__control"
+              >
+                <option value="">선택</option>
+                <option value="식비">식비</option>
+                <option value="월급">월급</option>
+                <option value="문화">문화</option>
+                <option value="교통">교통</option>
+                <option value="기타">기타</option>
+                <option value="생활">생활</option>
+              </select>
+            </div>
+
+            <div class="expense-form-modal__field">
+              <label class="expense-form-modal__label" for="expense-payment">결제수단</label>
+              <select
+                id="expense-payment"
+                name="payment"
+                class="expense-form-modal__control"
+              >
+                <option value="">선택</option>
+                <option value="신용카드">신용카드</option>
+                <option value="체크카드">체크카드</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="expense-form-modal__footer">
+            <button type="submit" class="expense-form-modal__submit-button">추가</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <div class="expense-detail-modal" data-modal="상세-보기" hidden>
+      <div class="expense-detail-modal__backdrop" data-action="상세-닫기"></div>
+      <section
+        class="expense-detail-modal__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="expense-detail-title"
+      >
+        <div class="expense-detail-modal__header">
+          <h2 id="expense-detail-title" class="expense-detail-modal__heading">
+            내역 상세
+          </h2>
+          <button
+            type="button"
+            class="expense-detail-modal__close-button"
+            data-action="상세-닫기"
+            aria-label="상세 닫기"
+          >
+            닫기
+          </button>
+        </div>
+
+        <div class="expense-detail-modal__content">
+          <dl class="expense-detail-modal__list">
+            <div class="expense-detail-modal__item">
+              <dt class="expense-detail-modal__term">제목</dt>
+              <dd class="expense-detail-modal__value" data-detail="title">-</dd>
+            </div>
+            <div class="expense-detail-modal__item">
+              <dt class="expense-detail-modal__term">금액</dt>
+              <dd class="expense-detail-modal__value" data-detail="amount">-</dd>
+            </div>
+            <div class="expense-detail-modal__item">
+              <dt class="expense-detail-modal__term">날짜</dt>
+              <dd class="expense-detail-modal__value" data-detail="date">-</dd>
+            </div>
+            <div class="expense-detail-modal__item">
+              <dt class="expense-detail-modal__term">카테고리</dt>
+              <dd class="expense-detail-modal__value" data-detail="category">-</dd>
+            </div>
+            <div class="expense-detail-modal__item">
+              <dt class="expense-detail-modal__term">결제수단</dt>
+              <dd class="expense-detail-modal__value" data-detail="payment">-</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+    </div>
     <script type="module" src="js/app.js"></script>
   </body>
 </html>

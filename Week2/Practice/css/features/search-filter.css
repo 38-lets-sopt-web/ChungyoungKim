@@ -1,7 +1,7 @@
 .search-filter {
   padding: var(--space-40);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   background: var(--color-surface-strong);
 }
 
@@ -37,8 +37,8 @@
 
 .search-filter__control {
   width: 100%;
-  height: var(--space-60);
-  padding: var(--space-20);
+  height: var(--space-50);
+  padding: 0 var(--space-20);
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-md);
   background: var(--color-surface);
@@ -53,12 +53,13 @@
 
 .search-filter__button {
   grid-column: span 3;
-  min-height: var(--space-60);
+  min-height: var(--space-50);
+  padding: 0 var(--space-20);
   border: 0;
   border-radius: var(--radius-md);
   background: var(--color-header-background);
   color: var(--color-header-text);
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 700;
 }
 
