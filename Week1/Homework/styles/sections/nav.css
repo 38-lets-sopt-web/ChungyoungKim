@@ -18,11 +18,8 @@
   font-weight: 600;
   color: #2e2a27;
   background-color: #ffffff;
-  transition: color 0.2s ease, background-color 0.2s ease;
-}
-
-.side-toc__item:not(:first-child):not(:last-child) a {
   border-radius: 1rem;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 .side-toc__item:first-child a {
