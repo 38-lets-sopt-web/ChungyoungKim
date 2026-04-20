@@ -1,0 +1,90 @@
+export function setupFilters(state) {
+  const form = document.querySelector(".search-filter__form");
+  const resetButton = document.querySelector('[data-action="필터-초기화"]');
+
+  if (!form || !resetButton) {
+    return;
+  }
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    state.filters = getFiltersFromForm(form);
+    applyFilters(state);
+  });
+
+  resetButton.addEventListener("click", () => {
+    form.reset();
+    state.filters = createEmptyFilters();
+    applyFilters(state);
+  });
+
+  applyFilters(state);
+}
+
+export function applyFilters(state) {
+  state.filteredExpenses = filterExpenses(state.expenses, state.filters);
+  notifyFilteredExpenses(state);
+}
+
+function getExpenseType(expense) {
+  return expense.amount >= 0 ? "수입" : "지출";
+}
+
+function createEmptyFilters() {
+  return {
+    keyword: "",
+    type: "",
+    category: "",
+    payment: "",
+  };
+}
+
+function getFiltersFromForm(form) {
+  const formData = new FormData(form);
+
+  return {
+    keyword: String(formData.get("keyword") ?? "").trim(),
+    type: String(formData.get("type") ?? "").trim(),
+    category: String(formData.get("category") ?? "").trim(),
+    payment: String(formData.get("payment") ?? "").trim(),
+  };
+}
+
+function filterExpenses(expenses, filters) {
+  return expenses.filter((expense) => {
+    const type = getExpenseType(expense);
+    const keyword = filters.keyword.toLowerCase();
+    const searchableValues = [
+      expense.id,
+      expense.title,
+      expense.date,
+      expense.category,
+      expense.payment,
+      expense.amount,
+      Math.abs(expense.amount),
+      type,
+    ].join(" ").toLowerCase();
+
+    const matchesKeyword = !keyword || searchableValues.includes(keyword);
+    const matchesType = !filters.type || type === filters.type;
+    const matchesCategory =
+      !filters.category || expense.category === filters.category;
+    const matchesPayment =
+      !filters.payment || expense.payment === filters.payment;
+
+    return (
+      matchesKeyword && matchesType && matchesCategory && matchesPayment
+    );
+  });
+}
+
+function notifyFilteredExpenses(state) {
+  document.dispatchEvent(
+    new CustomEvent("expenses:filter", {
+      detail: {
+        expenses: state.filteredExpenses,
+        filters: state.filters,
+      },
+    })
+  );
+}

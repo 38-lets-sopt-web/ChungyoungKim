@@ -24,13 +24,13 @@
 
 .expense-table__sort-select {
   min-width: 180px;
-  height: var(--space-50);
-  padding: 0 var(--space-20);
+  height: var(--space-40);
+  padding: 0 var(--space-10);
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-md);
   background: var(--color-surface);
   color: var(--color-text-default);
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 .expense-table__sort-select:focus-visible,
@@ -48,13 +48,13 @@
 
 .expense-table__action-button {
   min-width: 120px;
-  min-height: var(--space-50);
+  min-height: var(--space-40);
   padding: 0 var(--space-20);
   border: 0;
   border-radius: var(--radius-md);
   background: var(--color-primary);
   color: var(--color-accent-contrast);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
 }
 
@@ -71,7 +71,7 @@
   padding: var(--space-30);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  background: var(--color-surface-strong);
+  background: var(--color-claude-white);
 }
 
 .expense-table__card-header {
@@ -85,11 +85,6 @@
   font-weight: 700;
 }
 
-.expense-table__description {
-  color: var(--color-text-muted);
-  font-size: 1rem;
-}
-
 .expense-table__table-wrap {
   overflow-x: auto;
 }
@@ -100,11 +95,14 @@
   table-layout: fixed;
 }
 
+.expense-table__table__header {
+  background-color: var(--color-claude-border-cream);
+}
+
 .expense-table__table th,
 .expense-table__table td {
   padding: var(--space-20);
   border-top: 1px solid var(--color-border);
-  color: var(--color-text-default);
   font-size: 0.95rem;
   text-align: left;
   vertical-align: middle;
@@ -138,19 +136,35 @@
 }
 
 .expense-table__amount-heading,
-.expense-table__amount,
+.expense-table__amount-cell,
 .expense-table__total-value {
   text-align: right;
 }
 
+.expense-table__amount {
+  color: var(--color-text-strong);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
 .expense-table__amount--positive {
   color: var(--color-positive);
-  font-weight: 700;
 }
 
 .expense-table__amount--negative {
   color: var(--color-negative);
-  font-weight: 700;
+}
+
+.expense-table__total-value {
+  color: var(--color-text-strong);
+}
+
+.expense-table__total-value--positive {
+  color: var(--color-positive);
+}
+
+.expense-table__total-value--negative {
+  color: var(--color-negative);
 }
 
 .expense-table__empty {
