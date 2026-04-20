@@ -1,0 +1,121 @@
+.expense-form-modal[hidden] {
+  display: none;
+}
+
+.expense-form-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+}
+
+.expense-form-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 20, 19, 0.48);
+}
+
+.expense-form-modal__panel {
+  position: relative;
+  width: min(640px, calc(100% - var(--space-40)));
+  padding: var(--space-40);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-strong);
+}
+
+.expense-form-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-20);
+  margin-bottom: var(--space-40);
+}
+
+.expense-form-modal__title {
+  color: var(--color-text-default);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.expense-form-modal__close-button {
+  min-width: var(--space-50);
+  min-height: var(--space-40);
+  padding: 0 var(--space-10);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text-strong);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.expense-form-modal__fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-20);
+}
+
+.expense-form-modal__field--full {
+  grid-column: 1 / -1;
+}
+
+.expense-form-modal__label {
+  display: block;
+  margin-bottom: var(--space-10);
+  color: var(--color-text-strong);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.expense-form-modal__control {
+  width: 100%;
+  height: var(--space-50);
+  padding: 0 var(--space-10);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text-default);
+  font-size: 0.95rem;
+}
+
+.expense-form-modal__control:focus-visible,
+.expense-form-modal__close-button:focus-visible,
+.expense-form-modal__submit-button:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.expense-form-modal__footer {
+  margin-top: var(--space-30);
+  display: flex;
+  justify-content: flex-start;
+}
+
+.expense-form-modal__submit-button {
+  min-width: 120px;
+  min-height: var(--space-50);
+  padding: 0 var(--space-20);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: var(--color-accent-contrast);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .expense-form-modal__panel {
+    width: calc(100% - var(--space-30));
+    padding: var(--space-20);
+  }
+
+  .expense-form-modal__fields {
+    grid-template-columns: 1fr;
+  }
+
+  .expense-form-modal__field--full {
+    grid-column: auto;
+  }
+}
