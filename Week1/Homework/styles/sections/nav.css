@@ -1,0 +1,36 @@
+.side-toc {
+  padding: 1.25rem;
+  background-color: var(--color-surface);
+  border-radius: 2rem;
+}
+
+.side-toc__list {
+  display: grid;
+  gap: 0.75rem;
+  background-color: var(--color-surface);
+  border-radius: 1.5rem;
+}
+
+.side-toc__item a {
+  display: block;
+  padding: 1.25rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2e2a27;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.side-toc__item:first-child a {
+  border-radius: 1.5rem 1.5rem 0.8rem 0.8rem;
+}
+
+.side-toc__item:last-child a {
+  border-radius: 0.8rem 0.8rem 1.5rem 1.5rem;
+}
+
+.side-toc__item a:hover {
+  color: #1f6f7c;
+  background-color: #edf9fb;
+}
