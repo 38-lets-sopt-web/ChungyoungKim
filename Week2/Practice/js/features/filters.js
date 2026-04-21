@@ -1,4 +1,4 @@
-export function setupFilters(state) {
+export function setupFilters(state, onFilterChange) {
   const form = document.querySelector(".search-filter__form");
   const resetButton = document.querySelector('[data-action="필터-초기화"]');
 
@@ -9,21 +9,20 @@ export function setupFilters(state) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     state.filters = getFiltersFromForm(form);
-    applyFilters(state);
+    onFilterChange?.();
   });
 
   resetButton.addEventListener("click", () => {
     form.reset();
     state.filters = createEmptyFilters();
-    applyFilters(state);
+    onFilterChange?.();
   });
-
-  applyFilters(state);
 }
 
 export function applyFilters(state) {
+  // 폼 입력값과 맞는 항목만 남기도록 상태를 갱신하는 로직
   state.filteredExpenses = filterExpenses(state.expenses, state.filters);
-  notifyFilteredExpenses(state);
+  return state.filteredExpenses;
 }
 
 function getExpenseType(expense) {
@@ -54,6 +53,8 @@ function filterExpenses(expenses, filters) {
   return expenses.filter((expense) => {
     const type = getExpenseType(expense);
     const keyword = filters.keyword.toLowerCase();
+
+    // 한 번의 검색어로 여러 속성을 같이 확인할 수 있게 묶어두는 방식
     const searchableValues = [
       expense.id,
       expense.title,
@@ -76,15 +77,4 @@ function filterExpenses(expenses, filters) {
       matchesKeyword && matchesType && matchesCategory && matchesPayment
     );
   });
-}
-
-function notifyFilteredExpenses(state) {
-  document.dispatchEvent(
-    new CustomEvent("expenses:filter", {
-      detail: {
-        expenses: state.filteredExpenses,
-        filters: state.filters,
-      },
-    })
-  );
 }
