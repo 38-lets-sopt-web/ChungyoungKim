@@ -1,0 +1,10 @@
+.card {
+    padding: 16px;
+    margin: 16px;
+    width: 200px;
+    height: 150px;
+
+    border-radius: var(--radius-lg);
+    background-color: var(--color-card);
+    color: var(--color-black);
+}
