@@ -229,11 +229,13 @@ function createAmountCell(amount) {
 }
 
 function renderTotal(totalValue, totalAmount) {
-  totalValue.innerHTML = `
-    <span class="${getTotalValueClassName(totalAmount)}">
-      ${formatSignedAmount(totalAmount)}
-    </span>
-  `;
+  totalValue.replaceChildren();
+
+  const amountText = document.createElement("span");
+  amountText.className = getTotalValueClassName(totalAmount);
+  amountText.textContent = formatSignedAmount(totalAmount);
+
+  totalValue.appendChild(amountText);
 }
 
 function updateSelectionControls(

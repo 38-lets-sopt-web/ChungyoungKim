@@ -1,3 +1,5 @@
+import { EXPENSE_TYPE } from "../constants/expense-type.js";
+
 export function setupExpenseFormModal(state, { onAdd } = {}) {
   const openButton = document.querySelector('[data-action="항목-추가"]');
   const modal = document.querySelector('[data-modal="내역-추가"]');
@@ -123,7 +125,7 @@ function createSignedAmount(type, amount) {
   const parsedAmount = Number(amount);
 
   // 사용자가 고른 유형에 따라 저장 금액의 부호를 결정
-  if (type === "지출") {
+  if (type === EXPENSE_TYPE.EXPENSE) {
     return parsedAmount * -1;
   }
 

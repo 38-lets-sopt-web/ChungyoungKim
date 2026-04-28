@@ -1,3 +1,8 @@
+import {
+  getExpenseTypeKey,
+  getExpenseTypeLabel,
+} from "../constants/expense-type.js";
+
 export function setupFilters(state, onFilterChange) {
   const form = document.querySelector(".search-filter__form");
   const resetButton = document.querySelector('[data-action="필터-초기화"]');
@@ -25,10 +30,6 @@ export function applyFilters(state) {
   return state.filteredExpenses;
 }
 
-function getExpenseType(expense) {
-  return expense.amount >= 0 ? "수입" : "지출";
-}
-
 function createEmptyFilters() {
   return {
     keyword: "",
@@ -51,7 +52,8 @@ function getFiltersFromForm(form) {
 
 function filterExpenses(expenses, filters) {
   return expenses.filter((expense) => {
-    const type = getExpenseType(expense);
+    const typeKey = getExpenseTypeKey(expense);
+    const typeLabel = getExpenseTypeLabel(typeKey);
     const keyword = filters.keyword.toLowerCase();
 
     // 한 번의 검색어로 여러 속성을 같이 확인할 수 있게 묶어두는 방식
@@ -63,11 +65,11 @@ function filterExpenses(expenses, filters) {
       expense.payment,
       expense.amount,
       Math.abs(expense.amount),
-      type,
+      typeLabel,
     ].join(" ").toLowerCase();
 
     const matchesKeyword = !keyword || searchableValues.includes(keyword);
-    const matchesType = !filters.type || type === filters.type;
+    const matchesType = !filters.type || typeKey === filters.type;
     const matchesCategory =
       !filters.category || expense.category === filters.category;
     const matchesPayment =

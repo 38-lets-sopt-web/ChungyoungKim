@@ -81,17 +81,6 @@
   word-break: keep-all;
 }
 
-.expense-detail-modal__close-button {
-  min-width: var(--space-50);
-  min-height: var(--space-40);
-  padding: 0 var(--space-10);
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
-  color: var(--color-text-strong);
-  font-size: 0.9rem;
-  font-weight: 600;
-}
 
 @media (max-width: 700px) {
   .expense-detail-modal__panel {
