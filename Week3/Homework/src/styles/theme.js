@@ -151,7 +151,7 @@ export const theme = {
     subtle: '6px',
     card: '16px',
     pill: '12px',
-    circle: '20%',
+    circle: '100%',
   },
   shadows: {
     flat: 'none',
