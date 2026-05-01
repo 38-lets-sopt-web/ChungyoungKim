@@ -1,0 +1,10 @@
+.header {
+    background-color: var(--color-header);
+    padding: 20px;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: var(--font-xl);
+}
