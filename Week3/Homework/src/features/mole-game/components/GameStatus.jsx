@@ -44,7 +44,7 @@ const Value = styled.p`
 
 const GameStatus = ({ timeLeft, score, successCount, failureCount }) => {
   const statusItems = [
-    { label: '남은 시간', value: timeLeft.toFixed(1), isWide: true },
+    { label: '남은 시간', value: `${timeLeft}초`, isWide: true },
     { label: '총 점수', value: score, isWide: true },
     { label: '성공', value: successCount, tone: 'success' },
     { label: '실패', value: failureCount, tone: 'danger' },

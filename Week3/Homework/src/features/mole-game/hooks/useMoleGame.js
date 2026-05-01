@@ -7,10 +7,9 @@ import {
   GAME_STATUS,
   GAME_TIMER_INTERVAL_MS,
   LEVEL_CONFIG,
-  MIN_RANKING_SCORE,
   SCORE_CHANGE,
   TIME_LEFT_DECREASE_SECONDS,
-} from './constants'
+} from '../constants'
 import {
   createCellsWithRandomTarget,
   createEmptyCells,
@@ -18,42 +17,10 @@ import {
   hideMissCell,
   markCellAsHit,
   markCellAsMiss,
-} from './gameUtils'
-import { saveRankingRecord } from '../ranking/rankingStorage'
-
-const createGameResultId = () => {
-  const cryptoApi = globalThis.crypto
-
-  if (typeof cryptoApi?.randomUUID === 'function') {
-    return cryptoApi.randomUUID()
-  }
-
-  return `${Date.now()}-${Math.random().toString(36).slice(2)}`
-}
-
-const isSuccessfulResult = (result) => {
-  return result.score >= MIN_RANKING_SCORE
-}
-
-const createGameResult = (levelConfig, currentState) => ({
-  id: createGameResultId(),
-  levelLabel: levelConfig.label,
-  score: currentState.score,
-  successCount: currentState.successCount,
-  failureCount: currentState.failureCount,
-  successTime: new Date().toISOString(),
-})
-
-const getInitialState = (levelConfig) => ({
-  status: GAME_STATUS.IDLE,
-  cells: createEmptyCells(levelConfig),
-  score: 0,
-  successCount: 0,
-  failureCount: 0,
-  timeLeft: levelConfig.durationSeconds,
-  message: GAME_MESSAGES.READY,
-  result: null,
-})
+} from '../utils/gameUtils'
+import { createGameResult, isSuccessfulResult } from '../utils/gameResult'
+import { getInitialState } from '../utils/gameState'
+import { saveRankingRecord } from '../../ranking/rankingStorage'
 
 const useMoleGame = () => {
   const [levelId, setLevelId] = useState(DEFAULT_LEVEL_ID)

@@ -1,4 +1,4 @@
-import { CELL_STATUS, MOLE_SPAWN_PROBABILITY } from './constants'
+import { CELL_STATUS, MOLE_SPAWN_PROBABILITY } from '../constants'
 
 export const createEmptyCells = ({ rows, columns }) => {
   const cellCount = rows * columns
@@ -9,11 +9,11 @@ export const createEmptyCells = ({ rows, columns }) => {
   }))
 }
 
-export const getRandomCellIndex = (cellCount) => {
+const getRandomCellIndex = (cellCount) => {
   return Math.floor(Math.random() * cellCount)
 }
 
-export const getRandomTargetStatus = () => {
+const getRandomTargetStatus = () => {
   return Math.random() < MOLE_SPAWN_PROBABILITY
     ? CELL_STATUS.MOLE
     : CELL_STATUS.BOMB
@@ -29,30 +29,32 @@ export const createCellsWithRandomTarget = (levelConfig) => {
   )
 }
 
-export const hideHitCell = (cells, cellId) => {
+const markCellStatus = (cells, cellId, status) => {
   return cells.map((cell) =>
-    cell.id === cellId && cell.status === CELL_STATUS.HIT
-      ? { ...cell, status: CELL_STATUS.HOLE }
-      : cell,
+    cell.id === cellId ? { ...cell, status } : cell,
   )
 }
 
-export const hideMissCell = (cells, cellId) => {
+const hideFeedbackCell = (cells, cellId, feedbackStatus) => {
   return cells.map((cell) =>
-    cell.id === cellId && cell.status === CELL_STATUS.MISS
+    cell.id === cellId && cell.status === feedbackStatus
       ? { ...cell, status: CELL_STATUS.HOLE }
       : cell,
   )
 }
 
 export const markCellAsHit = (cells, cellId) => {
-  return cells.map((cell) =>
-    cell.id === cellId ? { ...cell, status: CELL_STATUS.HIT } : cell,
-  )
+  return markCellStatus(cells, cellId, CELL_STATUS.HIT)
 }
 
 export const markCellAsMiss = (cells, cellId) => {
-  return cells.map((cell) =>
-    cell.id === cellId ? { ...cell, status: CELL_STATUS.MISS } : cell,
-  )
+  return markCellStatus(cells, cellId, CELL_STATUS.MISS)
+}
+
+export const hideHitCell = (cells, cellId) => {
+  return hideFeedbackCell(cells, cellId, CELL_STATUS.HIT)
+}
+
+export const hideMissCell = (cells, cellId) => {
+  return hideFeedbackCell(cells, cellId, CELL_STATUS.MISS)
 }

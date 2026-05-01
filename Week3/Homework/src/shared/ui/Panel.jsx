@@ -7,10 +7,6 @@ const Panel = styled.div`
       return theme.colors.background.container
     }
 
-    if ($variant === 'board') {
-      return theme.colors.background.board
-    }
-
     return theme.colors.background.card
   }};
 `

@@ -95,14 +95,6 @@ const getCellLabel = (status) => {
     return '나 잡아보지마라'
   }
 
-  if (status === CELL_STATUS.HIT) {
-    return ''
-  }
-
-  if (status === CELL_STATUS.MISS) {
-    return ''
-  }
-
   return ''
 }
 

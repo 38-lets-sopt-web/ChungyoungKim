@@ -5,23 +5,11 @@ const getButtonBackground = (variant, theme) => {
     return theme.colors.danger
   }
 
-  if (variant === 'light') {
-    return theme.colors.white
-  }
-
-  if (variant === 'tab') {
+  if (variant === 'accent') {
     return theme.colors.activeTab
   }
 
   return theme.colors.success
-}
-
-const getButtonColor = (variant, theme) => {
-  if (variant === 'light') {
-    return theme.colors.text.primary
-  }
-
-  return theme.colors.white
 }
 
 const Button = styled.button`
@@ -30,7 +18,7 @@ const Button = styled.button`
   padding: 8px 15px 10px;
   background-color: ${({ $variant = 'primary', theme }) =>
     getButtonBackground($variant, theme)};
-  color: ${({ $variant = 'primary', theme }) => getButtonColor($variant, theme)};
+  color: ${({ theme }) => theme.colors.white};
   font-size: ${({ theme }) => theme.fontSizes.body};
   font-weight: ${({ theme }) => theme.fontWeights.strong};
   line-height: ${({ theme }) => theme.lineHeights.body};

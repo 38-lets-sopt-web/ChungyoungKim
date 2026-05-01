@@ -118,7 +118,7 @@ const ResultModal = ({ isOpen, result, onClose }) => {
             <DetailValue>{result.failureCount}</DetailValue>
           </DetailItem>
         </DetailList>
-        <ModalButton type="button" $variant="tab" onClick={onClose}>
+        <ModalButton type="button" $variant="accent" onClick={onClose}>
           처음으로
         </ModalButton>
       </Dialog>

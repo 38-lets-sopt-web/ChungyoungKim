@@ -6,7 +6,7 @@ import GameStatus from './components/GameStatus'
 import LevelSelector from './components/LevelSelector'
 import ResultModal from './components/ResultModal'
 import Panel from '../../shared/ui/Panel'
-import useMoleGame from './useMoleGame'
+import useMoleGame from './hooks/useMoleGame'
 
 const GameSection = styled.section`
   width: ${({ theme }) => theme.layout.contentWidth};

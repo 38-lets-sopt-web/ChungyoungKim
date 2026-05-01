@@ -1,33 +1,11 @@
-import { useState } from 'react'
 import styled from '@emotion/styled'
 import Button from '../../shared/ui/Button'
 import Panel from '../../shared/ui/Panel'
 import {
-  clearRankingRecords,
-  readRankingRecords,
-} from './rankingStorage'
-import {
   EMPTY_RANKING_MESSAGE,
-  INVALID_DATE_PLACEHOLDER,
-  RANKING_DATE_LOCALE,
-  RANKING_RESET_CONFIRM_MESSAGE,
   RANKING_TABLE_COLUMN_COUNT,
 } from './constants'
-
-const successTimeFormatter = new Intl.DateTimeFormat(RANKING_DATE_LOCALE, {
-  dateStyle: 'medium',
-  timeStyle: 'medium',
-})
-
-const formatSuccessTime = (successTime) => {
-  const date = new Date(successTime)
-
-  if (Number.isNaN(date.getTime())) {
-    return INVALID_DATE_PLACEHOLDER
-  }
-
-  return successTimeFormatter.format(date)
-}
+import useRankingRecords from './hooks/useRankingRecords'
 
 const RankingSection = styled.section`
   width: ${({ theme }) => theme.layout.contentWidth};
@@ -54,10 +32,6 @@ const Title = styled.h2`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   line-height: ${({ theme }) => theme.lineHeights.compact};
   letter-spacing: ${({ theme }) => theme.letterSpacings.none};
-`
-
-const ResetButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.danger};
 `
 
 const RankingTable = styled.table`
@@ -101,33 +75,20 @@ const EmptyCell = styled(BodyCell)`
 `
 
 const RankingPage = () => {
-  const [rankingRecords, setRankingRecords] = useState(readRankingRecords)
-  const rankingRows = rankingRecords.map((record, index) => ({
-    ...record,
-    rank: index + 1,
-    recordedAt: formatSuccessTime(record.successTime),
-  }))
-  const hasRankingRows = rankingRows.length > 0
-
-  const handleResetClick = () => {
-    const confirmed = window.confirm(RANKING_RESET_CONFIRM_MESSAGE)
-
-    if (!confirmed) {
-      return
-    }
-
-    clearRankingRecords()
-    setRankingRecords([])
-  }
+  const { rankingRows, hasRankingRows, resetRankingRecords } = useRankingRecords()
 
   return (
     <RankingSection>
       <RankingPanel $variant="panel">
         <RankingHeader>
           <Title>랭킹 보드</Title>
-          <ResetButton type="button" $variant="danger" onClick={handleResetClick}>
+          <Button
+            type="button"
+            $variant="danger"
+            onClick={resetRankingRecords}
+          >
             기록 초기화
-          </ResetButton>
+          </Button>
         </RankingHeader>
 
         <RankingTable>
