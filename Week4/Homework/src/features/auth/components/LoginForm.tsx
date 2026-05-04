@@ -1,9 +1,9 @@
 import type { CSSObject } from '@emotion/react'
-import { Eye, EyeOff } from 'lucide-react'
 import { Link } from 'react-router'
 
 import { ROUTE_PATHS } from '@/app/routes'
 import type { LoginFormController } from '@/features/auth/hooks/useLoginForm'
+import { PasswordVisibilityButton } from '@/features/auth/components/PasswordVisibilityButton'
 import { CtaButton } from '@/shared/components/CtaButton'
 import { TextField } from '@/shared/components/TextField'
 import { theme } from '@/shared/styles/theme'
@@ -36,20 +36,10 @@ export function LoginForm({ loginForm }: LoginFormProps) {
         autoComplete="current-password"
         onChange={(event) => actions.changePassword(event.target.value)}
         endAdornment={
-          <button
-            css={passwordVisibilityButtonStyle}
-            type="button"
-            aria-label={
-              state.isPasswordVisible ? '비밀번호 숨기기' : '비밀번호 보기'
-            }
+          <PasswordVisibilityButton
+            isVisible={state.isPasswordVisible}
             onClick={actions.togglePasswordVisibility}
-          >
-            {state.isPasswordVisible ? (
-              <EyeOff css={passwordIconStyle} aria-hidden="true" />
-            ) : (
-              <Eye css={passwordIconStyle} aria-hidden="true" />
-            )}
-          </button>
+          />
         }
       />
 
@@ -84,31 +74,6 @@ const titleStyle: CSSObject = {
   fontWeight: 800,
   lineHeight: theme.lineHeight.tight,
   textAlign: 'center',
-}
-
-const passwordVisibilityButtonStyle: CSSObject = {
-  position: 'absolute',
-  right: theme.spacing.sm,
-  display: 'inline-flex',
-  width: theme.size.iconButton,
-  height: theme.size.iconButton,
-  alignItems: 'center',
-  justifyContent: 'center',
-  border: 0,
-  borderRadius: theme.radius.round,
-  background: 'transparent',
-  color: theme.colors.textMuted,
-  transition: 'background-color 160ms ease, color 160ms ease',
-
-  '&:hover': {
-    background: theme.colors.surfaceMuted,
-    color: theme.colors.brand,
-  },
-}
-
-const passwordIconStyle: CSSObject = {
-  width: theme.size.icon,
-  height: theme.size.icon,
 }
 
 const errorMessageStyle: CSSObject = {
