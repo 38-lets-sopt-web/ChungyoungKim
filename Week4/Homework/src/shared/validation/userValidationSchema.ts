@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 import { SOPT_PARTS } from '@/shared/types/user'
 
-export const LOGIN_ID_MAX_LENGTH_FOR_CHALLENGE = 50
+export const LOGIN_ID_DISPLAY_MAX_LENGTH = 50
 
 export const loginIdRequestSchema = z
   .string()
