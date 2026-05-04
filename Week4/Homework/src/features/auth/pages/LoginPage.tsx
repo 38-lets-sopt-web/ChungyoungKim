@@ -1,13 +1,13 @@
-import { Link } from 'react-router'
-
-import { ROUTE_PATHS } from '@/app/routes'
-import { pageShellStyle } from '@/shared/styles/pageShellStyle'
+import { LoginForm } from '@/features/auth/components/LoginForm'
+import { useLoginForm } from '@/features/auth/hooks/useLoginForm'
+import { PageShell } from '@/shared/components/PageShell'
 
 export function LoginPage() {
+  const loginForm = useLoginForm()
+
   return (
-    <main css={pageShellStyle}>
-      <h1>로그인</h1>
-      <Link to={ROUTE_PATHS.signup}>회원가입</Link>
-    </main>
+    <PageShell>
+      <LoginForm loginForm={loginForm} />
+    </PageShell>
   )
 }
