@@ -22,7 +22,8 @@ export function TextField({
   const inputId = id ?? generatedId
   const errorMessageId = `${inputId}-error`
   const hasErrorMessage = errorMessage !== undefined && errorMessage.length > 0
-  const inputCss = endAdornment === undefined ? inputStyle : inputWithAdornmentStyle
+  const inputCss =
+    endAdornment === undefined ? inputStyle : inputWithAdornmentStyle
 
   return (
     <div css={fieldStyle} className={className}>
