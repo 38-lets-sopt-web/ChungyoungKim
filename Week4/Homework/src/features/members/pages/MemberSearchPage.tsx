@@ -1,13 +1,8 @@
-import { Link } from 'react-router'
-
-import { ROUTE_PATHS } from '@/app/routes'
-import { PageShell } from '@/shared/components/PageShell'
+import { MemberSearch } from '@/features/members/components/MemberSearch'
+import { useMemberSearch } from '@/features/members/hooks/useMemberSearch'
 
 export function MemberSearchPage() {
-  return (
-    <PageShell>
-      <h1>회원 조회</h1>
-      <Link to={ROUTE_PATHS.memberDetail(1)}>상세 정보</Link>
-    </PageShell>
-  )
+  const memberSearch = useMemberSearch()
+
+  return <MemberSearch memberSearch={memberSearch} />
 }
