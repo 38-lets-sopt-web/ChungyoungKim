@@ -1,6 +1,9 @@
 import type { CSSObject } from '@emotion/react'
+import { Link } from 'react-router'
 
+import { ROUTE_PATHS } from '@/app/routes'
 import type { MemberSearchController } from '@/features/members/hooks/useMemberSearch'
+import { createMemberDetailItems } from '@/features/members/utils/createMemberDetailItems'
 import { CtaButton } from '@/shared/components/CtaButton'
 import { TextField } from '@/shared/components/TextField'
 import { UserInfoCard } from '@/shared/components/UserInfoCard'
@@ -105,23 +108,15 @@ function MemberList({ errorMessage, isLoading, members }: MemberListProps) {
   return (
     <ul css={memberGridStyle}>
       {members.map((member) => (
-        <li css={memberCardStyle} key={member.id}>
-          <strong>{member.name}</strong>
-          <span>{member.part}</span>
+        <li key={member.id}>
+          <Link css={memberCardStyle} to={ROUTE_PATHS.memberDetail(member.id)}>
+            <strong>{member.name}</strong>
+            <span>{member.part}</span>
+          </Link>
         </li>
       ))}
     </ul>
   )
-}
-
-function createMemberDetailItems(member: User) {
-  return [
-    { label: '아이디', value: member.loginId },
-    { label: '이름', value: member.name },
-    { label: '이메일', value: member.email },
-    { label: '나이', value: `${member.age}세` },
-    { label: '파트', value: member.part },
-  ]
 }
 
 const pageStyle: CSSObject = {
@@ -210,6 +205,12 @@ const memberCardStyle: CSSObject = {
   color: theme.colors.brand,
   fontSize: theme.fontSize.md,
   fontWeight: 900,
+  transition: 'transform 160ms ease, box-shadow 160ms ease',
+
+  '&:hover': {
+    boxShadow: `0 0.8rem 2rem ${theme.colors.primaryFocusRing}`,
+    transform: 'translateY(-0.2rem)',
+  },
 
   span: {
     borderRadius: theme.radius.round,

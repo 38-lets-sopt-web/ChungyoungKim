@@ -1,16 +1,11 @@
-import { Link, useParams } from 'react-router'
+import { useParams } from 'react-router'
 
-import { ROUTE_PATHS } from '@/app/routes'
-import { PageShell } from '@/shared/components/PageShell'
+import { MemberDetail } from '@/features/members/components/MemberDetail'
+import { useMemberDetail } from '@/features/members/hooks/useMemberDetail'
 
 export function MemberDetailPage() {
   const { userId } = useParams()
+  const memberDetail = useMemberDetail(userId)
 
-  return (
-    <PageShell>
-      <h1>상세 정보</h1>
-      <p>회원 ID: {userId}</p>
-      <Link to={ROUTE_PATHS.memberSearch}>뒤로가기</Link>
-    </PageShell>
-  )
+  return <MemberDetail memberDetail={memberDetail} />
 }
