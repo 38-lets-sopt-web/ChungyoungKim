@@ -1,10 +1,10 @@
 import type { CSSObject } from '@emotion/react'
 
-import { UserInfoCard } from '@/features/mypage/components/UserInfoCard'
 import type { MypageUserController } from '@/features/mypage/hooks/useMypageUser'
 import type { ProfileFormController } from '@/features/profile/hooks/useProfileForm'
 import { CtaButton } from '@/shared/components/CtaButton'
 import { TextField } from '@/shared/components/TextField'
+import { UserInfoCard } from '@/shared/components/UserInfoCard'
 import { theme } from '@/shared/styles/theme'
 
 type ProfileFormProps = {

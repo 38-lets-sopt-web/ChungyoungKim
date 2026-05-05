@@ -6,7 +6,7 @@ import {
   getSignedInUserId,
   removeSignedInUserId,
 } from '@/features/auth/storage/authStorage'
-import { getUser } from '@/features/mypage/api/getUser'
+import { getUser } from '@/shared/api/userApi'
 import type { UserResponseData } from '@/shared/api/userApiType'
 
 type MypageUserState = {
