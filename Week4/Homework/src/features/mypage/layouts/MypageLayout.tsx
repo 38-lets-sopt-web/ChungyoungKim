@@ -11,7 +11,7 @@ export function MypageLayout() {
   return (
     <div css={layoutStyle}>
       <MypageHeader mypageUser={mypageUser} />
-      <Outlet />
+      <Outlet context={mypageUser} />
     </div>
   )
 }

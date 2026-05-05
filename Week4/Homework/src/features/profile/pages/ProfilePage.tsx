@@ -1,13 +1,10 @@
-import { Link } from 'react-router'
-
-import { ROUTE_PATHS } from '@/app/routes'
-import { PageShell } from '@/shared/components/PageShell'
+import { useMypageUserContext } from '@/features/mypage/hooks/useMypageUserContext'
+import { ProfileForm } from '@/features/profile/components/ProfileForm'
+import { useProfileForm } from '@/features/profile/hooks/useProfileForm'
 
 export function ProfilePage() {
-  return (
-    <PageShell>
-      <h1>내 정보</h1>
-      <Link to={ROUTE_PATHS.memberSearch}>회원 조회</Link>
-    </PageShell>
-  )
+  const mypageUser = useMypageUserContext()
+  const profileForm = useProfileForm(mypageUser)
+
+  return <ProfileForm mypageUser={mypageUser} profileForm={profileForm} />
 }
