@@ -5,6 +5,7 @@ import { LoginPage } from '@/features/auth/pages/LoginPage'
 import { SignupPage } from '@/features/auth/pages/SignupPage'
 import { MemberDetailPage } from '@/features/members/pages/MemberDetailPage'
 import { MemberSearchPage } from '@/features/members/pages/MemberSearchPage'
+import { MypageLayout } from '@/features/mypage/layouts/MypageLayout'
 import { ProfilePage } from '@/features/profile/pages/ProfilePage'
 
 export const router = createBrowserRouter([
@@ -21,15 +22,25 @@ export const router = createBrowserRouter([
     Component: SignupPage,
   },
   {
-    path: ROUTE_PATHS.myProfile,
-    Component: ProfilePage,
-  },
-  {
-    path: ROUTE_PATHS.memberSearch,
-    Component: MemberSearchPage,
-  },
-  {
-    path: ROUTE_PATHS.memberDetail(':userId'),
-    Component: MemberDetailPage,
+    path: ROUTE_PATHS.mypage,
+    Component: MypageLayout,
+    children: [
+      {
+        index: true,
+        element: <Navigate to={ROUTE_PATHS.myProfile} replace />,
+      },
+      {
+        path: 'profile',
+        Component: ProfilePage,
+      },
+      {
+        path: 'members',
+        Component: MemberSearchPage,
+      },
+      {
+        path: 'members/:userId',
+        Component: MemberDetailPage,
+      },
+    ],
   },
 ])
