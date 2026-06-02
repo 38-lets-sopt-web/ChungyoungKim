@@ -7,6 +7,7 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<MovieListPage />} />
+      <Route path="/:movieId" element={<MovieDetailPage />} />
       <Route path="/movies/:movieId" element={<MovieDetailPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
