@@ -1,141 +1,178 @@
 import styled from '@emotion/styled'
-import { Link } from 'react-router-dom'
+import { useCallback, useMemo, useState } from 'react'
 
+import { MovieCard } from '@/features/movies/components/MovieCard'
+import { RatingFilterSelect } from '@/features/movies/components/RatingFilterSelect'
 import {
-  MOVIE_ROUTES,
-  RATING_FILTER,
+  RATING_FILTER_OPTIONS,
+  type RatingFilterId,
 } from '@/features/movies/constants'
-import { hasTmdbApiKey } from '@/shared/config/env'
+import { useInfiniteMoviesQuery } from '@/features/movies/hooks/useMovieQueries'
+import { useInfiniteScroll } from '@/features/movies/hooks/useInfiniteScroll'
+import {
+  canRequestTmdbApi,
+  tmdbApiKeyStatus,
+  type TmdbApiKeyStatus,
+} from '@/shared/config/env'
 
 export function MovieListPage() {
+  const [ratingFilterId, setRatingFilterId] =
+    useState<RatingFilterId>('all')
+  const selectedRatingFilter = getRatingFilterOption(ratingFilterId)
+  const moviesQuery = useInfiniteMoviesQuery(
+    selectedRatingFilter.params,
+    canRequestTmdbApi,
+  )
+  const fetchNextPage = moviesQuery.fetchNextPage
+  const movies = useMemo(
+    () => moviesQuery.data?.pages.flatMap((page) => page.results) ?? [],
+    [moviesQuery.data],
+  )
+  const canFetchNextPage =
+    moviesQuery.hasNextPage === true && !moviesQuery.isFetchingNextPage
+
+  const fetchNextPageOnIntersect = useCallback(() => {
+    if (canFetchNextPage) {
+      void fetchNextPage()
+    }
+  }, [canFetchNextPage, fetchNextPage])
+
+  const observerTargetRef = useInfiniteScroll({
+    enabled: canFetchNextPage,
+    onIntersect: fetchNextPageOnIntersect,
+  })
+
   return (
     <Page>
-      <Header>
-        <Title>영화 탐색</Title>
-        <Description>
-          TMDB 목록, 별점 필터, 무한 스크롤을 붙일 기본 라우팅과 데이터 계층이
-          준비되어 있습니다.
-        </Description>
-      </Header>
+      <Content>
+        <Title>Movie Explorer</Title>
 
-      <Toolbar aria-label="별점 필터">
-        <FilterLabel htmlFor="rating-filter">최소 별점</FilterLabel>
-        <FilterInput
-          id="rating-filter"
-          type="number"
-          min={RATING_FILTER.min}
-          max={RATING_FILTER.max}
-          step={RATING_FILTER.step}
-          placeholder="0.0"
-        />
-      </Toolbar>
+        <Toolbar aria-label="영화 목록 필터">
+          <RatingFilterSelect
+            value={ratingFilterId}
+            onChange={setRatingFilterId}
+          />
+        </Toolbar>
 
-      <SetupPanel>
-        <PanelTitle>
-          {hasTmdbApiKey ? 'API 키가 설정되었습니다.' : 'API 키 설정이 필요합니다.'}
-        </PanelTitle>
-        <PanelText>
-          `.env` 파일에 VITE_API_BASE_URL과 VITE_API_KEY를 넣으면 다음 단계에서
-          실제 영화 목록을 렌더링할 수 있습니다.
-        </PanelText>
-        <DetailLink to={MOVIE_ROUTES.detail(550)}>
-          상세 페이지 라우트 확인
-        </DetailLink>
-      </SetupPanel>
+        {!canRequestTmdbApi ? (
+          <StateMessage>{getTmdbApiKeyStatusMessage(tmdbApiKeyStatus)}</StateMessage>
+        ) : null}
+
+        {canRequestTmdbApi && moviesQuery.isPending ? (
+          <StateMessage>영화를 불러오는 중입니다.</StateMessage>
+        ) : null}
+
+        {canRequestTmdbApi && moviesQuery.isError ? (
+          <StateMessage>
+            영화 목록을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.
+          </StateMessage>
+        ) : null}
+
+        {moviesQuery.isSuccess && movies.length === 0 ? (
+          <StateMessage>조건에 맞는 영화가 없습니다.</StateMessage>
+        ) : null}
+
+        {movies.length > 0 ? (
+          <MovieGrid>
+            {movies.map((movie) => (
+              <MovieCard key={movie.id} movie={movie} />
+            ))}
+          </MovieGrid>
+        ) : null}
+
+        <ScrollTarget ref={observerTargetRef} aria-hidden="true" />
+
+        {moviesQuery.isFetchingNextPage ? (
+          <LoadingMore>영화를 더 불러오는 중입니다.</LoadingMore>
+        ) : null}
+      </Content>
     </Page>
   )
 }
 
+function getRatingFilterOption(ratingFilterId: RatingFilterId) {
+  return (
+    RATING_FILTER_OPTIONS.find((option) => option.id === ratingFilterId) ??
+    RATING_FILTER_OPTIONS[0]
+  )
+}
+
+function getTmdbApiKeyStatusMessage(status: TmdbApiKeyStatus) {
+  switch (status) {
+    case 'missing':
+      return 'TMDB API 키를 설정해주세요.'
+    case 'v4-access-token':
+      return 'VITE_API_KEY에는 v4 Read Access Token이 아니라 32자리 v3 API Key를 넣어주세요.'
+    case 'invalid-format':
+      return 'TMDB API Key 형식이 올바르지 않습니다. 32자리 v3 API Key를 확인해주세요.'
+    case 'valid-v3-api-key':
+      return ''
+  }
+}
+
 const Page = styled.main`
   min-height: 100vh;
-  padding: ${({ theme }) => theme.spacing[8]};
+  padding: ${({ theme }) => theme.layout.pagePaddingBlock}
+    ${({ theme }) => theme.spacing[6]};
   background: ${({ theme }) => theme.colors.background};
 `
 
-const Header = styled.header`
-  max-width: 960px;
+const Content = styled.div`
+  width: min(100%, ${({ theme }) => theme.layout.contentMaxWidth});
+  margin: 0 auto;
 `
 
 const Title = styled.h1`
   margin: 0;
   color: ${({ theme }) => theme.colors.text};
   font-size: ${({ theme }) => theme.typography.display};
-`
-
-const Description = styled.p`
-  max-width: 680px;
-  margin: ${({ theme }) => theme.spacing[3]} 0 0;
-  color: ${({ theme }) => theme.colors.subtleText};
-  font-size: ${({ theme }) => theme.typography.body};
-  line-height: 1.7;
+  font-weight: 800;
+  line-height: 1.2;
 `
 
 const Toolbar = styled.section`
   display: flex;
-  align-items: end;
-  gap: ${({ theme }) => theme.spacing[3]};
-  max-width: 960px;
+  align-items: center;
+  min-height: ${({ theme }) => theme.layout.toolbarMinHeight};
   margin-top: ${({ theme }) => theme.spacing[7]};
-  padding-bottom: ${({ theme }) => theme.spacing[5]};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-`
-
-const FilterLabel = styled.label`
-  display: grid;
-  gap: ${({ theme }) => theme.spacing[2]};
-  color: ${({ theme }) => theme.colors.text};
-  font-size: ${({ theme }) => theme.typography.caption};
-  font-weight: 700;
-`
-
-const FilterInput = styled.input`
-  width: 128px;
-  height: 44px;
-  padding: 0 ${({ theme }) => theme.spacing[3]};
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: ${({ theme }) => theme.radius.sm};
-  background: ${({ theme }) => theme.colors.surface};
-  color: ${({ theme }) => theme.colors.text};
-  font-size: ${({ theme }) => theme.typography.body};
-`
-
-const SetupPanel = styled.section`
-  max-width: 960px;
-  margin-top: ${({ theme }) => theme.spacing[6]};
-  padding: ${({ theme }) => theme.spacing[6]};
+  padding: 0 ${({ theme }) => theme.spacing[4]};
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.radius.md};
   background: ${({ theme }) => theme.colors.surface};
-  box-shadow: ${({ theme }) => theme.shadow.card};
 `
 
-const PanelTitle = styled.h2`
-  margin: 0;
-  color: ${({ theme }) => theme.colors.text};
-  font-size: ${({ theme }) => theme.typography.subtitle};
-`
+const MovieGrid = styled.section`
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: ${({ theme }) => theme.spacing[5]};
+  margin-top: ${({ theme }) => theme.spacing[6]};
 
-const PanelText = styled.p`
-  margin: ${({ theme }) => theme.spacing[3]} 0 ${({ theme }) => theme.spacing[5]};
-  color: ${({ theme }) => theme.colors.subtleText};
-  line-height: 1.7;
-`
-
-const DetailLink = styled(Link)`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0 ${({ theme }) => theme.spacing[4]};
-  border-radius: ${({ theme }) => theme.radius.sm};
-  background: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.onPrimary};
-  font-weight: 700;
-  text-decoration: none;
-  transition: transform 160ms ease, box-shadow 160ms ease;
-
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: ${({ theme }) => theme.shadow.focus};
+  @media (max-width: ${({ theme }) => theme.breakpoint.tablet}) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoint.mobile}) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoint.compact}) {
+    grid-template-columns: 1fr;
+  }
+`
+
+const StateMessage = styled.p`
+  margin: ${({ theme }) => theme.spacing[6]} 0 0;
+  color: ${({ theme }) => theme.colors.subtleText};
+  font-size: ${({ theme }) => theme.typography.body};
+  font-weight: 600;
+`
+
+const ScrollTarget = styled.div`
+  height: 1px;
+`
+
+const LoadingMore = styled.p`
+  margin: ${({ theme }) => theme.spacing[6]} 0 0;
+  color: ${({ theme }) => theme.colors.subtleText};
+  text-align: center;
 `
