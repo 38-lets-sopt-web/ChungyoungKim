@@ -1,14 +1,18 @@
 export const theme = {
   colors: {
-    background: '#f6f3ee',
-    surface: '#fffdf8',
-    text: '#202124',
+    background: '#f5f5f5',
+    surface: '#ffffff',
+    text: '#111827',
     subtleText: '#5f6368',
     muted: '#7b6f61',
-    border: '#ded7ca',
+    border: '#e9e9e9',
+    borderHover: 'rgb(32 33 36 / 16%)',
+    posterFallback: '#ebe7df',
     primary: '#b9382f',
     onPrimary: '#ffffff',
     accent: '#0f766e',
+    focusRing: 'rgb(185 56 47 / 28%)',
+    focusShadow: 'rgb(185 56 47 / 16%)',
   },
   spacing: {
     1: '4px',
@@ -25,7 +29,8 @@ export const theme = {
     md: '8px',
   },
   shadow: {
-    card: '0 16px 40px rgb(32 33 36 / 8%)',
+    card: '0 8px 24px rgb(32 33 36 / 6%)',
+    cardHover: '0 16px 40px rgb(32 33 36 / 8%)',
     focus: '0 10px 24px rgb(185 56 47 / 22%)',
   },
   typography: {
@@ -33,6 +38,25 @@ export const theme = {
     title: '32px',
     subtitle: '22px',
     body: '16px',
+    cardTitle: '15px',
     caption: '13px',
+  },
+  layout: {
+    contentMaxWidth: '960px',
+    pagePaddingBlock: '70px',
+    toolbarMinHeight: '76px',
+    infiniteScrollRootMargin: '320px',
+  },
+  size: {
+    ratingFilterWidth: '160px',
+    movieOverviewMinHeight: '66px',
+  },
+  aspectRatio: {
+    poster: '2 / 3',
+  },
+  breakpoint: {
+    tablet: '900px',
+    mobile: '680px',
+    compact: '440px',
   },
 } as const
