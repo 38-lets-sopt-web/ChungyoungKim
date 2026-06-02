@@ -2,4 +2,8 @@
 .idea/
 *.iml
 worklog.md
-
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
