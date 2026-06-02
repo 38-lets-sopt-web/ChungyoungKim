@@ -10,5 +10,9 @@ declare module '@emotion/react' {
     radius: AppTheme['radius']
     shadow: AppTheme['shadow']
     typography: AppTheme['typography']
+    layout: AppTheme['layout']
+    size: AppTheme['size']
+    aspectRatio: AppTheme['aspectRatio']
+    breakpoint: AppTheme['breakpoint']
   }
 }
