@@ -11,6 +11,7 @@ export const theme = {
     primary: '#b9382f',
     onPrimary: '#ffffff',
     accent: '#0f766e',
+    danger: '#c2410c',
     focusRing: 'rgb(185 56 47 / 28%)',
     focusShadow: 'rgb(185 56 47 / 16%)',
   },
@@ -27,6 +28,7 @@ export const theme = {
   radius: {
     sm: '6px',
     md: '8px',
+    pill: '999px',
   },
   shadow: {
     card: '0 8px 24px rgb(32 33 36 / 6%)',
@@ -35,6 +37,7 @@ export const theme = {
   },
   typography: {
     display: '40px',
+    detailTitle: '40px',
     title: '32px',
     subtitle: '22px',
     body: '16px',
@@ -43,13 +46,23 @@ export const theme = {
   },
   layout: {
     contentMaxWidth: '960px',
+    detailContentMaxWidth: '1080px',
     pagePaddingBlock: '70px',
+    detailPagePaddingBlock: '48px',
     toolbarMinHeight: '76px',
     infiniteScrollRootMargin: '320px',
   },
   size: {
+    controlHeight: '44px',
     ratingFilterWidth: '160px',
+    userRatingInputWidth: '180px',
+    basicInfoLabelWidth: '84px',
     movieOverviewMinHeight: '66px',
+    detailBackdropHeight: '340px',
+    detailBackdropMobileHeight: '220px',
+    detailPosterWidth: '220px',
+    detailPosterMobileWidth: '180px',
+    genreBadgeHeight: '32px',
   },
   aspectRatio: {
     poster: '2 / 3',
